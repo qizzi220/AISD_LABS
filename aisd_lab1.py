@@ -173,7 +173,7 @@ markdown_table = render_table_to_md(results)
 
 with open("README.md", "w", encoding="utf-8") as f:
     f.write("# Лабораторная работа №1\n\n")
-    f.write("## Результаты замеров сложности\n\n")
+    f.write("## Результаты замеров сложности tim_sort\n\n")
     f.write(markdown_table)
     f.write("\n")
 
