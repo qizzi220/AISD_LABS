@@ -131,7 +131,7 @@ def tim_sort(arr):
                 merge(arr, left, mid, right)
 
         size *= 2
-
+260307Repytwjd)
 if __name__ == '__main__':
     sizes = [100, 1000, 5000, 10000]
     for n in sizes:
