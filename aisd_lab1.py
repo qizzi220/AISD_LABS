@@ -1,7 +1,7 @@
 import time
 import random
 import tracemalloc
-import pandas
+import pandas as pd
 
 def count_even(arr):
     count = 0
@@ -23,7 +23,7 @@ def measure_time(func, data):
     end = time.perf_counter()
     current, peak = tracemalloc.get_traced_memory()
     end_memory = tracemalloc.stop()
-    return end - start, f"байтов памяти затрачено: {peak}"
+    return f"{end - start} байтов_памяти_затрачено:{peak}"
 
 def find_item(item, array: list):
     for i in array:
@@ -131,9 +131,24 @@ def tim_sort(arr):
                 merge(arr, left, mid, right)
 
         size *= 2
-260307Repytwjd)
+
+
+def render_table_to_md(df):
+    # Заголовки
+    cols = list(df.columns)
+    header = "| " + " | ".join(cols) + " |"
+    separator = "| " + " | ".join(["---"] * len(cols)) + " |"
+
+    # Строки данных
+    rows = []
+    for _, row in df.iterrows():
+        formatted_row = "| " + " | ".join(map(str, row.values)) + " |"
+        rows.append(formatted_row)
+
+    return "\n".join([header, separator] + rows)
 if __name__ == '__main__':
     sizes = [100, 1000, 5000, 10000]
+    results = []
     for n in sizes:
         arr = generate_array(n)
         t = measure_time(count_even, arr)
@@ -145,9 +160,22 @@ if __name__ == '__main__':
 
         print(binary_search(arr[random.randint(0, n)], arr), "binary_search", end='\n')
 
-        print(measure_time(tim_sort, arr), f"tim_sort от {n}", end='\n')
+        algo_compl, space_compl = measure_time(tim_sort, arr).split()
+        results.append({"N": n, 'сложность алгоритмическая': algo_compl,
+        'сложность пространственная': space_compl})
 
 
+results = pd.DataFrame(results)
+
+#print(results)
+
+markdown_table = render_table_to_md(results)
+
+with open("README.md", "w", encoding="utf-8") as f:
+    f.write("# Лабораторная работа №1\n\n")
+    f.write("## Результаты замеров сложности\n\n")
+    f.write(markdown_table)
+    f.write("\n")
 
 
 print(times_table(10))
