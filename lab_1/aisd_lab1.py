@@ -134,12 +134,12 @@ def tim_sort(arr):
 
 
 def render_table_to_md(df):
-    # Заголовки
+    # заголовки таблицы
     cols = list(df.columns)
     header = "| " + " | ".join(cols) + " |"
     separator = "| " + " | ".join(["---"] * len(cols)) + " |"
 
-    # Строки данных
+    # строки с данными
     rows = []
     for _, row in df.iterrows():
         formatted_row = "| " + " | ".join(map(str, row.values)) + " |"
