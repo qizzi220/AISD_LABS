@@ -36,7 +36,7 @@ class BusRoute:
         return self._n
 
     def _make_array(self, c: int):
-        #использование библиотеки ctypes для создания привычного массива из C
+        #использую ctypes,чтобы создать привычный массив из c
         return (c * ctypes.py_object)()
 
     def _resize(self, new_cap: int) -> None:
@@ -220,7 +220,8 @@ class BusRoute:
         print(f"Base64-маршрут сохранен в {filename}")
 
     def get_stops_within_time(self, start_index: int, limit_minutes: int):
-        """нахождение остановок через какое-то время. Тут также требуется нормализация времени,тк datetime не умеет работать с просто минутами и секундами, а только с датами"""
+        """нахождение остановок через какое-то время. Тут также требуется нормализация времени,тк datetime
+        не умеет работать с просто минутами и секундами, а только с датами"""
         limit = timedelta(minutes=limit_minutes)
         total_spent = timedelta(minutes=0)
         results = []
